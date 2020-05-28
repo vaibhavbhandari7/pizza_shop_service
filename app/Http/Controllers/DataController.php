@@ -32,12 +32,6 @@
 
                 $order = $request->all();
                 $order['cart'] =  json_encode($order['cart']);
-                try {
-                    $user = JWTAuth::parseToken()->authenticate();
-                    $order = array_merge($order, ['user_id' => $user->id ]);
-                } catch (Exception $e) {
-                    
-                }
 
                 $created = Order::create($order);
                 return response()->json(compact('created'));
